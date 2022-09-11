@@ -12,3 +12,20 @@ resource "null_resource" "ec2-automation" {
       host = element(aws_instance.web.*.public_ip, count.index)
     }
   }
+ 
+ provisioner "remote-exec" {
+    inline = [
+      "sudo chmod 777 /tmp/userdata.sh",
+      "cd /tmp",
+      "./userdata.sh"
+    ]
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("Ubuntu-Instance.pem")
+      #host = "${aws_instance.web.public_ip}"
+      host = element(aws_instance.web.*.public_ip, count.index)
+    }
+  }
+}
