@@ -3,7 +3,7 @@ resource "aws_subnet" "public-subnet" {
   vpc_id = aws_vpc.main.id
   #cidr_block = var.public_cidrs
   cidr_block = element(var.public_cidrs, count.index)
-  #availability_zone = ap-souh-1a
+  #availability_zone = ap-south-1a
   availability_zone = element(var.azs, count.index)
   tags = {
     #Name = "${var.vpc_name}Terraform-Public-Subnet "
