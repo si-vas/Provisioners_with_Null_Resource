@@ -16,6 +16,7 @@ resource "null_resource" "ec2-automation" {
   provisioner "remote-exec" {
     inline = [
       "sudo chmod 777 /tmp/userdata.sh",
+      "sudo chmod 777 /var/www/html/index.nginx-debian.html",
       "cd /tmp",
       "./userdata.sh"
     ]
