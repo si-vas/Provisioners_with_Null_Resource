@@ -9,6 +9,7 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = [aws_security_group.allow_all.id]
   #depends_on                 = [aws_subnet.public-subnet]
   tags = {
+    #Name ="Server-1"
     Name = "Server-${count.index + 1}"
   }
 }
