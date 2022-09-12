@@ -7,3 +7,6 @@ output "public-subnet" {
 output "ec2instanceip" {
   value = aws_instance.web.*.public_ip
 }
+#output "ec2instanceip" {
+#  value = aws_instance.web.public_ip
+#}
