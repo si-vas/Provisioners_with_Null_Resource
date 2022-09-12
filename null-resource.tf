@@ -12,8 +12,8 @@ resource "null_resource" "ec2-automation" {
       host = element(aws_instance.web.*.public_ip, count.index)
     }
   }
- 
- provisioner "remote-exec" {
+
+  provisioner "remote-exec" {
     inline = [
       "sudo chmod 777 /tmp/userdata.sh",
       "cd /tmp",
