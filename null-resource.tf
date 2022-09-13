@@ -8,20 +8,20 @@ resource "null_resource" "ec2-automation" {
       user        = "ubuntu"
       private_key = file("Ubuntu-Instance.pem")
       #host = "${aws_instance.web.public_ip}"
-      host = element(aws_instance.web.*.public_ip, count.index)
+      host = element(aws_instance.Public-Server.*.public_ip, count.index)
     }
   }
-  provisioner "file" {
-    source      = "aws_cli.sh"
-    destination = "/tmp/aws_cli.sh"
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("Ubuntu-Instance.pem")
-      #host = "${aws_instance.web.public_ip}"
-      host = element(aws_instance.web.*.public_ip, count.index)
+    provisioner "file" {
+      source      = "aws_cli.sh"
+      destination = "/tmp/aws_cli.sh"
+      connection {
+        type        = "ssh"
+        user        = "ubuntu"
+        private_key = file("Ubuntu-Instance.pem")
+        #host = "${aws_instance.web.public_ip}"
+        host = element(aws_instance.Public-Server.*.public_ip, count.index)
+      }
     }
-  }
 
   provisioner "remote-exec" {
     inline = [
@@ -38,7 +38,7 @@ resource "null_resource" "ec2-automation" {
       user        = "ubuntu"
       private_key = file("Ubuntu-Instance.pem")
       #host = "${aws_instance.web.public_ip}"
-      host = element(aws_instance.web.*.public_ip, count.index)
+      host = element(aws_instance.Public-Server.*.public_ip, count.index)
     }
   }
 }
