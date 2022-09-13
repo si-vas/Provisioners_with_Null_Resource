@@ -49,6 +49,6 @@ resource "null_resource" "ec2-automation" {
     }
   }
   provisioner "local-exec" {
-    command = "echo ${element(aws_instance.Public-Server.*.public_ip, count.index)} >> public_ips.txt && echo ${element(aws_instance.Public-Server.*.public_ip, count.index)}"
+    command = "echo ${element(aws_instance.Public-Server.*.public_ip, count.index)} >> public_ips.txt && echo ${element(aws_instance.Public-Server.*.private_ip, count.index)} >> public_ips.txt"
   }
 }
